@@ -10,6 +10,7 @@ SAMINPUT="/tmp/saminput_$EPOCH.txt"
 SAMINVERSE=$(dirname "$0")/saminverse.txt
 HREFANDUSER="/tmp/hrefanduser_$EPOCH.txt"
 ASSETPAGE=5
+WORKEMAIL="workemail.com"
 #####################################################
 
 #################
@@ -77,7 +78,7 @@ TROUBLESHOOTBREAK
 # Update SAManage assignments
 while read a b ; do
 	echo $a $b;
-	curl --digest -u ${USER}:${PASSWORD} -d '<hardware><owner><email>'${b}'@quantcast.com</email></owner></hardware>' -H 'Accept: application/vnd.samanage.v1.1+xml' -H 'Content-Type:text/xml' -X PUT $a
+	curl --digest -u ${USER}:${PASSWORD} -d '<hardware><owner><email>'${b}'@"$WORKEMAIL"</email></owner></hardware>' -H 'Accept: application/vnd.samanage.v1.1+xml' -H 'Content-Type:text/xml' -X PUT $a
 done < $SAMINPUT
 
 # Cleanup
